@@ -17,7 +17,7 @@ from launch_ros.parameter_descriptions import ParameterValue
 
 def generate_launch_description():
     revine_description = get_package_share_directory("revine_description")
-
+    world_file = os.path.join(revine_description, "worlds", "wro_world.sdf")
     model_arg = DeclareLaunchArgument(
         name="model",
         default_value=os.path.join(revine_description, "urdf", "revine.urdf.xacro"),
@@ -54,14 +54,28 @@ def generate_launch_description():
                 "/gz_sim.launch.py",
             ]
         ),
-        launch_arguments=[("gz_args", [" -v 4", " -r", " empty.sdf"])],
+        launch_arguments=[
+            (
+                "gz_args",
+                [" -v 4", " -r ", world_file],
+            )
+        ],
     )
 
     gz_spawn_entity = Node(
         package="ros_gz_sim",
         executable="create",
         output="screen",
-        arguments=["-topic", "robot_description", "-name", "revine"],
+        arguments=[
+            "-topic",
+            "robot_description",
+            "-name",
+            "revine",
+            "-x",
+            "0.0",  # X position in meters
+            "-y",
+            "-1.0",  # Y position in meters
+        ],
     )
 
     gz_ros2_bridge = Node(
@@ -70,6 +84,7 @@ def generate_launch_description():
         arguments=[
             "/clock@rosgraph_msgs/msg/Clock[gz.msgs.Clock",
             "/imu@sensor_msgs/msg/Imu[gz.msgs.IMU",
+            "/scan@sensor_msgs/msg/LaserScan[gz.msgs.LaserScan",
         ],
         remappings=[
             ("/imu", "/imu/out"),
