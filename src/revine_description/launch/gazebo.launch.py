@@ -20,7 +20,7 @@ def generate_launch_description():
     world_file = os.path.join(revine_description, "worlds", "wro_world.sdf")
     model_arg = DeclareLaunchArgument(
         name="model",
-        default_value=os.path.join(revine_description, "urdf", "revine.urdf.xacro"),
+        default_value=os.path.join(revine_description, "urdf", "acker.urdf.xacro"),
         description="Absolute path to robot urdf file",
     )
 
@@ -70,7 +70,7 @@ def generate_launch_description():
             "-topic",
             "robot_description",
             "-name",
-            "revine",
+            "acker",
             "-x",
             "0.0",  # X position in meters
             "-y",

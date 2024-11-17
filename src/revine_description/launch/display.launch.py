@@ -13,7 +13,7 @@ def generate_launch_description():
     revine_description_dir = get_package_share_directory("revine_description")
 
     model_arg = DeclareLaunchArgument(name="model", default_value=os.path.join(
-                                        revine_description_dir, "urdf", "revine.urdf.xacro"
+                                        revine_description_dir, "urdf", "acker.urdf.xacro"
                                         ),
                                       description="Absolute path to robot urdf file")
 
