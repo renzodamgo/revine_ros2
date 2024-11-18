@@ -85,22 +85,22 @@
 
 
   <link name="wheel_back_left_link">
-    <!-- <inertial>
+    <inertial>
       <origin xyz="0.213327728411634 -0.202539554308172 0.000327384188806199" rpy="0 0 0" />
       <mass value="0.132308742016336" />
       <inertia ixx="0.000109087078613509" ixy="8.99498920521203E-09" ixz="1.06792966043121E-08" iyy="0.000199665017441936" iyz="5.6160921837198E-09" izz="0.000109056977556842" />
-    </inertial> -->
+    </inertial>
     <visual>
-      <origin xyz="0 0 0" rpy="0 0 3.1415926535897931" />
+      <origin xyz="0 0 0" rpy="${M_PI / 2} 0 0" />
       <geometry>
-        <mesh filename="package://revine_description/meshes/wheel_right_back_link.stl" />
+        <cylinder radius="0.035" length="0.02"/>
       </geometry>
       <material name="black" />
     </visual>
     <collision>
-      <origin xyz="0 0 0" rpy="0 0 0" />
+      <origin xyz="0 0 0" rpy="${M_PI / 2} 0 0" />
       <geometry>
-        <mesh filename="package://revine_description/meshes/wheel_right_back_link.stl" />
+        <cylinder radius="0.035" length="0.02"/>
       </geometry>
     </collision>
   </link>
@@ -110,6 +110,35 @@
     <child link="wheel_back_left_link" />
     <axis xyz="0 0 0" />
   </joint>
+
+  <link name="wheel_back_right_link">
+    <inertial>
+      <origin xyz="0.213327728411634 -0.202539554308172 0.000327384188806199" rpy="0 0 0" />
+      <mass value="0.132308742016336" />
+      <inertia ixx="0.000109087078613509" ixy="8.99498920521203E-09" ixz="1.06792966043121E-08" iyy="0.000199665017441936" iyz="5.6160921837198E-09" izz="0.000109056977556842" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="${M_PI / 2} 0 0" />
+      <geometry>
+        <cylinder radius="0.035" length="0.02"/>
+      </geometry>
+      <material name="black" />
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="${M_PI / 2} 0 0" />
+      <geometry>
+        <cylinder radius="0.035" length="0.02"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="wheel_back_right_joint" type="fixed">
+    <origin xyz="-0.106753653016542 -0.0920004072996187 -0.0658214520621466" rpy="0 0 ${M_PI}" />
+    <parent link="base_link" />
+    <child link="wheel_back_right_link" />
+    <axis xyz="0 0 0" />
+  </joint>
+
+
 
   <joint name="base_green_joint" type="fixed">
     <origin xyz="0 0 0" rpy="0 0 0" />
